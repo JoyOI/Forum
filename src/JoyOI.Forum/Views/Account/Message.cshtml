@@ -1,0 +1,37 @@
+﻿@model User
+@{
+    IEnumerable<Message> messages = ViewBag.Messages;
+    ViewBag.Title = "站内信";
+}
+<style>
+    td {
+        padding: 8px 5px;
+    }
+</style>
+<div class="container">
+    <div class="cont-wrap">
+        <div class="grid_9">
+            <h2 class="exp-title">@ViewBag.Title</h2>
+            <h3 class="exp-sub-title">站内信</h3>
+            <div class="cont-outer">
+                @foreach (var x in messages)
+                { 
+                    <div class="message">
+                        <img src="/file/download/@x.Sender.AvatarId" class="message-avatar" />
+                        <div><a asp-action="Show" asp-controller="Account" asp-route-id="@x.SenderId"></a> @x.Time.ToString("yyyy-MM-dd HH:mm")</div>
+                        <div>@x.Content</div>
+                        <div><a asp-action="SendMessage" asp-controller="Account" asp-route-id="@User.Current.Id" asp-route-receiver="@x.Sender.UserName">回信</a></div>
+                    </div>
+                }
+                <div style="text-align: center">
+                    @if (Convert.ToInt32(Context.Request.Query["p"]) > 1)
+                    { 
+                        <a href="?p=@(Convert.ToInt32(Context.Request.Query["p"]) - 1)">上一页</a>
+                    }
+                    <a href="?p=@(Convert.ToInt32(Context.Request.Query["p"]) + 1)">下一页</a>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("Sidebar")
+    </div>
+</div>

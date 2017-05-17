@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "新建论坛版块";
+}
+
+<div class="row">
+    <div class="col-md-8 col-sm-12 col-md-offset-2">
+        <div class="card card-single card-error">
+            <div class="error-block-inner">
+                <h3>@ViewBag.Title</h3>
+                <form asp-action="CreateForum" asp-controller="Admin">
+                    <input type="hidden" name="parentid" value="@Context.Request.Query["parent"]" />
+                    <p>
+                        <span class="texthold">板块标识</span>
+                        <input type="text" class="textbox w-3" name="Id" placeholder="a-z A-Z 0-9 - _" />
+                    </p>
+                    <p>
+                        <span class="texthold">板块名称</span>
+                        <input type="text" class="textbox w-3" name="Title" />
+                    </p>
+                    <p>
+                        <span class="texthold">优先级</span>
+                        <input type="text" class="textbox w-3" name="PRI" />
+                    </p>
+                    <input type="submit" class="btn btn-default ripple home-link" value="创建板块">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

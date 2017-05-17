@@ -1,0 +1,22 @@
+﻿@model User
+<div class="grid_3">
+    <p class="center"><img class="sidebar-avatar" src="~/file/download/@Model.AvatarId" style="width: 100%;" /></p>
+    <p class="center"><a asp-controller="Account" asp-action="Show" asp-route-id="@Model.Id">@await Html.ColorUserNameAsync(Model, "sidebar-username")</a></p>
+    <div class="sidebar-nobg">
+        <p><a asp-controller="Account" asp-action="Show" asp-route-id="@Model.Id"><i class="fa fa-angle-double-right"></i> TA的资料</a></p>
+        @if (User.Current.Id == Model.Id)
+        {
+            <p><a asp-controller="Account" asp-action="Message" asp-route-id="@Model.Id"><i class="fa fa-angle-double-right"></i> 站内信</a></p>
+            <p><a asp-controller="Account" asp-action="SendMessage" asp-route-id="@Model.Id"><i class="fa fa-angle-double-right"></i> 发送站内信</a></p>
+        }
+        @if (User.IsSignedIn() && (User.AnyRoles("Root, Master") || User.Current.Id == Model.Id))
+        {
+            <p><a asp-controller="Account" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-angle-double-right"></i> 编辑个人资料</a></p>
+            <p><a asp-controller="Account" asp-action="Password" asp-route-id="@Model.Id"><i class="fa fa-angle-double-right"></i> 修改密码</a></p>
+        }
+        @if (User.AnyRoles("Root") || User.AnyRoles("Master") && !await User.Manager.IsInAnyRolesAsync(Model, "Root, Master"))
+        {
+            <p><a asp-controller="Account" asp-action="Role" asp-route-id="@Model.Id"><i class="fa fa-angle-double-right"></i> 修改角色</a></p>
+        }
+    </div>
+</div>

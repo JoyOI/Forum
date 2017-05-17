@@ -1,0 +1,29 @@
+﻿@model Forum
+@{ 
+    ViewBag.Title = "编辑论坛版块 - " + Model.Title;
+}
+
+<div class="row">
+    <div class="col-md-8 col-sm-12 col-md-offset-2">
+        <div class="card card-single card-error">
+            <div class="error-block-inner">
+                <h3>@ViewBag.Title</h3>
+                <form asp-action="EditForum" asp-controller="Admin" asp-route-id="@Model.Id">
+                    <p>
+                        <span class="texthold">ID</span>
+                        @Model.Id
+                    </p>
+                    <p>
+                        <span class="texthold">板块名称</span>
+                        <input type="text" class="textbox w-3" asp-for="Title" />
+                    </p>
+                    <p>
+                        <span class="texthold">优先级</span>
+                        <input type="text" class="textbox w-3" asp-for="PRI" />
+                    </p>
+                    <input type="submit" class="btn btn-default ripple home-link" value="保存修改">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

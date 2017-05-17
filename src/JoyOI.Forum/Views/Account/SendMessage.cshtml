@@ -1,0 +1,25 @@
+﻿@model User
+@{
+    ViewBag.Title = "发送站内信";
+}
+<style>
+    td {
+        padding: 8px 5px;
+    }
+</style>
+<div class="container">
+    <div class="cont-wrap">
+        <div class="grid_9">
+            <h2 class="exp-title">@ViewBag.Title</h2>
+            <h3 class="exp-sub-title">发送站内信</h3>
+            <div class="cont-outer">
+                <form asp-action="SendMessage" asp-controller="Account" method="post">
+                    <p>接收者：<br /><input type="text" class="textbox" name="receiver" value="@Context.Request.Query["receiver"]" /></p>
+                    <p>内容：<br /><textarea class="textbox" style="height: 200px;" name="content"></textarea></p>
+                    <p><input type="submit" value="发送" class="btn btn-default ripple home-link" /></p>
+                </form>
+            </div>
+        </div>
+        @Html.Partial("Sidebar")
+    </div>
+</div>

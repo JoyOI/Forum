@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Forum>
+@{
+    ViewBag.Title = "编辑板块";
+}
+
+<div class="container">
+    <div class="cont-wrap">
+        <div class="grid_12">
+            <h2 class="forum-title">@ViewBag.Title</h2>
+            @foreach(var x in Model)
+            {
+                <p>@x.Title <a asp-action="EditForum" asp-controller="Admin" asp-route-id="@x.Id">编辑</a> <a asp-action="DeleteForum" asp-controller="Admin" asp-route-id="@x.Id">删除</a></p>
+                <ul>
+                    @foreach (var y in x.SubForums)
+                    { 
+                        <li>@y.Title <a asp-action="EditForum" asp-controller="Admin" asp-route-id="@y.Id">编辑</a> <a asp-action="DeleteForum" asp-controller="Admin" asp-route-id="@y.Id">删除</a></li>
+                    }
+                    <li><a asp-action="CreateForum" asp-controller="Admin" asp-route-parent="@x.Id">添加子版块</a></li>
+                </ul>
+                <br />
+            }
+            <p>
+                <a asp-action="CreateForum" asp-controller="Admin">创建板块</a>
+            </p>
+        </div>
+    </div>
+</div>
