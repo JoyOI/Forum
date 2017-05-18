@@ -38,7 +38,7 @@ namespace JoyOI.Forum.Models
         public virtual ICollection<Post> SubPosts { get; set; } = new List<Post>();
 
         [ForeignKey("User")]
-        public long? UserId { get; set; }
+        public Guid? UserId { get; set; }
 
         public virtual User User { get; set; }
     }

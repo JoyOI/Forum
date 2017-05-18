@@ -33,7 +33,7 @@ namespace JoyOI.Forum.Models
         public bool IsAnnouncement { get; set; }
         
         [ForeignKey("User")]
-        public long UserId { get; set; }
+        public Guid UserId { get; set; }
 
         public virtual User User { get; set; }
 

@@ -35,5 +35,7 @@ namespace JoyOI.Forum.Models
 
         [NotMapped]
         public virtual Post LastPost { get; set; }
+
+        public bool IsHidden { get; set; }
     }
 }

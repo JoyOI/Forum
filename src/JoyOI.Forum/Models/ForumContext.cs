@@ -38,6 +38,7 @@ namespace JoyOI.Forum.Models
             {
                 e.Property(x => x.ParentId).IsRequired(false);
                 e.HasIndex(x => x.PRI);
+                e.HasIndex(x => x.IsHidden);
             });
         }
     }
