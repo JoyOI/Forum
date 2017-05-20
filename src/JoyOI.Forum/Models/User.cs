@@ -10,5 +10,18 @@ namespace JoyOI.Forum.Models
 
         [MaxLength(512)]
         public string Motto { get; set; }
+
+        [MaxLength(64)]
+        public string Nickname { get; set; }
+
+        [MaxLength(64)]
+        public string AccessToken { get; set; }
+
+        public DateTime ExpireTime { get; set; }
+
+        public Guid OpenId { get; set; }
+
+        [MaxLength(256)]
+        public string AvatarUrl { get; set; }
     }
 }

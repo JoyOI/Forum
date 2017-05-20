@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace ForumR.Hubs
+namespace JoyOI.Forum.Hubs
 {
     public class ForumHub : Hub
     {

@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using JoyOI.Forum.Models;
 using JoyOI.UserCenter.SDK;
@@ -23,20 +22,55 @@ namespace JoyOI.Forum.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(string username, string password, bool remember, [FromHeader] string Referer)
+        public async Task<IActionResult> Login(
+            string username, 
+            string password, 
+            bool remember, 
+            [FromHeader] string Referer,
+            [FromServices] JoyOIUC UC)
         {
-            var result = await SignInManager.PasswordSignInAsync(username, password, remember, false);
-            if (result.Succeeded)
-                return Redirect(Referer ?? Url.Action("Index", "Home"));
+            var authorizeResult = await UC.TrustedAuthorizeAsync(username, password);
+            if (authorizeResult.succeeded)
+            {
+                var profileResult = await UC.GetUserProfileAsync(authorizeResult.data.open_id, authorizeResult.data.access_token);
+
+                User user = await UserManager.FindByNameAsync(username);
+
+                if (user == null)
+                {
+                    user = new User
+                    {
+                        Id = authorizeResult.data.open_id,
+                        UserName = username,
+                        Email = profileResult.data.email,
+                        PhoneNumber = profileResult.data.phone,
+                        AccessToken = authorizeResult.data.access_token,
+                        ExpireTime = authorizeResult.data.expire_time,
+                        OpenId = authorizeResult.data.open_id,
+                        AvatarUrl = UC.GetAvatarUrl(authorizeResult.data.open_id)
+                    };
+
+                    await UserManager.CreateAsync(user, password);
+                }
+
+                if (authorizeResult.data.is_root)
+                {
+                    await UserManager.AddToRoleAsync(user, "Root");
+                }
+                
+                await SignInManager.SignInAsync(user, true);
+
+                return string.IsNullOrEmpty(Referer) ? (IActionResult)RedirectToAction("Index", "Home") : (IActionResult)Redirect(Referer);
+            }
             else
+            {
                 return Prompt(x =>
                 {
-                    x.Title = "登录失败";
-                    x.Details = "请检查用户名密码是否正确后返回上一页重试！";
-                    x.RedirectText = "忘记密码";
-                    x.RedirectUrl = Url.Action("Index", "Home");
-                    x.StatusCode = 403;
+                    x.Title = SR["Sign in failed"];
+                    x.Details = authorizeResult.msg;
+                    x.StatusCode = authorizeResult.code;
                 });
+            }
         }
 
         [HttpGet]
