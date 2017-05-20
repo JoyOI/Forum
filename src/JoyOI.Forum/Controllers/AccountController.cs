@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using System.Net;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -281,8 +282,8 @@ namespace JoyOI.Forum.Controllers
             });
         }
 
-        [Route("Account/{id:long}")]
-        public IActionResult Show(long id)
+        [Route("Account/{id:Guid}")]
+        public IActionResult Show(Guid id)
         {
             var user = DB.Users.Where(x => x.Id == id).SingleOrDefault();
             if (user == null)
@@ -298,7 +299,7 @@ namespace JoyOI.Forum.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Edit(long id)
+        public async Task<IActionResult> Edit(Guid id)
         {
             var user = DB.Users.Where(x => x.Id == id).SingleOrDefault();
             if (user == null)
@@ -329,10 +330,9 @@ namespace JoyOI.Forum.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, IFormFile avatar, User Model)
+        public async Task<IActionResult> Edit(Guid id, IFormFile avatar, User Model)
         {
             var user = DB.Users
-                .Include(x => x.Avatar)
                 .Where(x => x.Id == id).SingleOrDefault();
             if (user == null)
                 return Prompt(x =>
@@ -358,21 +358,7 @@ namespace JoyOI.Forum.Controllers
                 });
             if (avatar != null)
             {
-                try
-                {
-                    DB.Files.Remove(DB.Files.Single(x => x.Id == user.AvatarId));
-                }
-                catch { }
-                var file = new CodeComb.AspNet.Upload.Models.File
-                {
-                    Bytes = await avatar.ReadAllBytesAsync(),
-                    ContentLength = avatar.Length,
-                    ContentType = avatar.ContentType,
-                    FileName = avatar.GetFileName(),
-                    Time = DateTime.Now
-                };
-                DB.Files.Add(file);
-                user.AvatarId = file.Id;
+                // TODO: Call user center change avatar api.
             }
             user.Motto = Model.Motto;
             DB.SaveChanges();
@@ -476,62 +462,6 @@ namespace JoyOI.Forum.Controllers
             {
                 x.Title = "修改成功";
                 x.Details = "新密码已生效！";
-            });
-        }
-
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> Message(long id, int p = 0)
-        {
-            var user = await UserManager.FindByIdAsync(id.ToString());
-            ViewBag.Messages = DB.Messages
-                .Include(x => x.Sender)
-                .Where(x => x.ReceiverId == User.Current.Id)
-                .OrderByDescending(x => x.Time)
-                .Skip(10 * p)
-                .Take(10)
-                .ToList();
-            if (p > 0 && ViewBag.Messages.Count == 0)
-                return Prompt(x => 
-                {
-                    x.Title = "提示信息";
-                    x.Details = "没有更多的站内信了！";
-                });
-            return View(user);
-        }
-
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> SendMessage(long id)
-        {
-            var user = await UserManager.FindByIdAsync(id.ToString());
-            return View(user);
-        }
-
-        [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public IActionResult SendMessage(string receiver, string content)
-        {
-            var recv = DB.Users.SingleOrDefault(x => x.UserName == receiver);
-            if (recv == null)
-                return Prompt(x =>
-                {
-                    x.Title = "发送失败";
-                    x.Details = $"没有找到用户{receiver}";
-                });
-            DB.Messages.Add(new Message
-            {
-                SenderId = User.Current.Id,
-                ReceiverId = recv.Id,
-                Time = DateTime.Now,
-                Content = content
-            });
-            DB.SaveChanges();
-            return Prompt(x =>
-            {
-                x.Title = "发送成功";
-                x.Details = $"您的站内信已经成功发送至{recv.UserName}";
             });
         }
     }
