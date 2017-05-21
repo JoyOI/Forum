@@ -5,33 +5,66 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using JoyOI.Forum.Models;
 
 namespace JoyOI.Forum
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            IConfiguration Configuration;
+            services.AddConfiguration(out Configuration);
+
+            services.AddEntityFrameworkMySql()
+               .AddDbContext<ForumContext>(x => x.UseMySql("User ID=postgres;Password=123456;Host=localhost;Port=5432;Database=ForumR;"));
+
+            services.AddIdentity<User, IdentityRole<Guid>>(x =>
+            {
+                x.Password.RequireDigit = false;
+                x.Password.RequiredLength = 0;
+                x.Password.RequireLowercase = false;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequireUppercase = false;
+                x.User.AllowedUserNameCharacters = null;
+            })
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<ForumContext, long>();
+
+            services.AddBlobStorage()
+                .AddEntityFrameworkStorage<ForumContext>();
+
+            services.AddMvc();
+
+            services.AddSignalR();
+            services.AddAntiXss();
+            services.AddAesCrypto();
+            services.AddSmtpEmailSender("smtp.exmail.qq.com", 25, "Mano Cloud", "noreply@mano.cloud", "noreply@mano.cloud", "ManoCloud123456");
+            services.AddSmartCookies();
+            services.AddSmartUser<User, Guid>();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        
+        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole();
+            loggerFactory.AddConsole(LogLevel.Warning, true);
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseStaticFiles();
+            app.UseDeveloperExceptionPage();
+            app.UseIdentity();
+            app.UseBlobStorage("/assets/shared/scripts/jquery.pomelo.fileupload.js");
+            app.UseIdentity();
+            app.UseStaticFiles();
+            app.UseWebSockets();
+            app.UseSignalR();
+            app.UseAutoAjax();
+            app.UseMvcWithDefaultRoute();
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            await SampleData.InitDB(app.ApplicationServices);
         }
     }
 }
