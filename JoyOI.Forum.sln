@@ -1,17 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{66DFADDC-B98D-498A-BFD5-08AE3C8EAA1D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3FA8304C-0823-497F-81A1-6DA680EB28CA}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		NuGet.config = NuGet.config
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "JoyOI.Forum", "src\JoyOI.Forum\JoyOI.Forum.xproj", "{E2E6E448-8C24-41FF-8CFC-133A1256BC83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoyOI.Forum", "src\JoyOI.Forum\JoyOI.Forum.csproj", "{E2E6E448-8C24-41FF-8CFC-133A1256BC83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
