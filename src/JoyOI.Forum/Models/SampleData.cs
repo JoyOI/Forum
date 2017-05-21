@@ -12,12 +12,11 @@ namespace JoyOI.Forum.Models
         {
             var DB = services.GetRequiredService<ForumContext>();
             var UserManager = services.GetRequiredService<UserManager<User>>();
-            var RoleManager = services.GetRequiredService<RoleManager<IdentityRole<long>>>();
+            var RoleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
             if (DB.Database.EnsureCreated())
             {
-                await RoleManager.CreateAsync(new IdentityRole<long>("Root"));
-                await RoleManager.CreateAsync(new IdentityRole<long>("Master"));
-                await RoleManager.CreateAsync(new IdentityRole<long>("Member"));
+                await RoleManager.CreateAsync(new IdentityRole<Guid>("Root"));
+                await RoleManager.CreateAsync(new IdentityRole<Guid>("Master"));
 
                 var user = new User { UserName = "root", Email = "someone@somedomain.com" };
                 await UserManager.CreateAsync(user, "123456");

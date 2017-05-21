@@ -22,7 +22,7 @@ namespace JoyOI.Forum
             services.AddConfiguration(out Configuration);
 
             services.AddEntityFrameworkMySql()
-               .AddDbContext<ForumContext>(x => x.UseMySql("User ID=postgres;Password=123456;Host=localhost;Port=5432;Database=ForumR;"));
+               .AddDbContext<ForumContext>(x => x.UseMySql(Configuration["Data:MySQL"]));
 
             services.AddIdentity<User, IdentityRole<Guid>>(x =>
             {
@@ -34,7 +34,7 @@ namespace JoyOI.Forum
                 x.User.AllowedUserNameCharacters = null;
             })
                 .AddDefaultTokenProviders()
-                .AddEntityFrameworkStores<ForumContext, long>();
+                .AddEntityFrameworkStores<ForumContext, Guid>();
 
             services.AddBlobStorage()
                 .AddEntityFrameworkStorage<ForumContext>();

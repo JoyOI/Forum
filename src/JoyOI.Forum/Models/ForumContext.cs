@@ -7,6 +7,10 @@ namespace JoyOI.Forum.Models
 {
     public class ForumContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>, IBlobStorageDbContext
     {
+        public ForumContext(DbContextOptions opt) : base(opt)
+        {
+        }
+
         public DbSet<Forum> Forums { get; set; }
 
         public DbSet<Thread> Threads { get; set; }

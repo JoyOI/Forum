@@ -1,0 +1,10 @@
+﻿{
+  "Data": {
+    "MySQL": "server=localhost;database=joyoi_forum;uid=root;pwd=123456",
+    "Redis": "localhost"
+  },
+  "Security": {
+    "PrivateKey": "a8vks91pcja924jz",
+    "IV": "v8sdpz01j3o28sz0"
+  }
+}
