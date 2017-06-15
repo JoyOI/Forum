@@ -44,9 +44,9 @@ namespace JoyOI.Forum
             services.AddSignalR();
             services.AddAntiXss();
             services.AddAesCrypto();
-            services.AddSmtpEmailSender("smtp.exmail.qq.com", 25, "Mano Cloud", "noreply@mano.cloud", "noreply@mano.cloud", "ManoCloud123456");
             services.AddSmartCookies();
             services.AddSmartUser<User, Guid>();
+            services.AddJoyOIUserCenter();
         }
         
         public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
