@@ -24,9 +24,6 @@ namespace JoyOI.Forum.Controllers
         public IHubContext<ForumHub> ForumHub { get; set; }
 
         [Inject]
-        public IEmailSender Mail { get; set; }
-
-        [Inject]
         public AesCrypto Aes { get; set; }
     }
 }

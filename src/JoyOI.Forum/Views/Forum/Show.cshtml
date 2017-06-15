@@ -116,7 +116,7 @@
                     </tbody>
                 </table>
                 <div class="pager-outer">
-                    @Html.MakePager()
+                    @Html.Paging()
                     <div class="clear"></div>
                 </div>
                 @if (User.IsSignedIn() && (!Forum.IsReadOnly || User.AnyRoles("Root, Master")))

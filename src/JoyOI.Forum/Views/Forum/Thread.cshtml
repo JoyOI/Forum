@@ -185,7 +185,7 @@
                 </div>
                 <br />
                 <div class="pager-outer">
-                    @Html.MakePager()
+                    @Html.MakePaging()
                     <div class="clear"></div>
                 </div>
                 @if (User.IsSignedIn() && (!Thread.IsLocked || User.AnyRoles("Root, Master")))
