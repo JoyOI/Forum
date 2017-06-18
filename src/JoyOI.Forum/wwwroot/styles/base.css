@@ -159,10 +159,10 @@ iframe {
     }
 
     .textbox:focus {
-        border-color: #6486c6;
+        border-color: #637d4b;
         background: #fcfcfc;
-        -webkit-box-shadow: 0 0 10px #6486c6;
-        box-shadow: 0 0 10px #6486c6;
+        -webkit-box-shadow: 0 0 10px #637d4b;
+        box-shadow: 0 0 10px #637d4b;
         behavior: url(/Styles/PIE.htc);
     }
 
