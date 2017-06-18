@@ -3,10 +3,18 @@
     ViewBag.Title = "编辑板块";
 }
 
+@section Navigator {
+    <div class="columns">
+        <div class="location-path">
+            / <a href="/">JoyOI</a> / 
+        </div>
+        <h1 class="location-current" data-emoji-enabled="">@ViewBag.Title</h1>
+    </div>
+}
+
 <div class="container">
     <div class="cont-wrap">
         <div class="grid_12">
-            <h2 class="forum-title">@ViewBag.Title</h2>
             @foreach(var x in Model)
             {
                 <p>@x.Title <a asp-action="EditForum" asp-controller="Admin" asp-route-id="@x.Id">编辑</a> <a asp-action="DeleteForum" asp-controller="Admin" asp-route-id="@x.Id">删除</a></p>
