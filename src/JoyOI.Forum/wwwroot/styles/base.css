@@ -1800,7 +1800,20 @@ pre {
         padding: 0px 7px;
     }
 }
+@media (max-width: 767px) {
+    .mobile-cover {
+        height: 300px;
+        overflow-y: hidden;
+    }
 
+    .mobile-cover .mobile-cover-center {
+        text-align: center !important;
+    }
+
+    .mobile-cover .mobile-cover-img {
+        margin-top: 0px !important;
+    }
+}
 @media (max-width: 767px) {
     .navbar-default {
         -webkit-box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 12px 0 rgba(0, 0, 0, 0.12);

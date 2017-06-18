@@ -21,30 +21,31 @@
     <script src="~/signalr/js"></script>
     <script src="~/scripts/main.js"></script>
 </head>
-<body class="home-template fixed-navbar">
+<body class="home-template fixed-navbar" style="overflow-x:hidden;">
     <!-- start header -->
     <header class="main-header">
         <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <i class="material-icons">&#xE5D2;</i>
                     </button>
                     <!-- start logo -->
-                    <a class="navbar-logo" asp-controller="Home" asp-action="Index"><img src="~/images/logo-bk.png" /></a>
-                    <!-- end logo -->
-                </div>
+                    <div class="container-fluid">
+                        <a class="navbar-logo" asp-controller="Home" asp-action="Index"><img src="~/images/logo-bk.png" /></a>
+                     </div>
+                        <!-- end logo -->
+                    </div>
                 @Html.Partial("_Navigator")
             </div>
         </nav>
     </header>
     <!-- end header -->
-
-    <div class="cover cover-single @(IsSectionDefined("Navigator") == false ? "" : "cover-url")">
+    <div class="cover cover-single mobile-cover @(IsSectionDefined("Navigator") == false ? "" : "cover-url")">
         <div class="cont-wrap">
-            <div class="grid_12" style="text-align:left">
-                <img src="~/images/logo.png" style="height:140px;margin-top:-60px;" />
+            <div class="grid_12 mobile-cover-center" style="text-align:left">
+                <img src="~/images/logo.png" class="mobile-cover-img" style="height:140px;margin-top:-60px;" />
             </div>
         </div>
         @if (IsSectionDefined("Navigator"))
