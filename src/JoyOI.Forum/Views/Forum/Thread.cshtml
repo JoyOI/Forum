@@ -9,7 +9,7 @@
         <div class="location-path">
             / <a href="/">JoyOI</a> / <a asp-action="Show" asp-controller="Forum" asp-route-id="@Thread.ForumId">@Thread.Forum.Title</a> /
         </div>
-        <h1 class="location-current" data-emoji-enabled="">@Thread.Forum.Title</h1>
+        <h1 class="location-current" data-emoji-enabled="">@Thread.Title</h1>
     </div>
 }
 
@@ -49,7 +49,6 @@
 <div class="container">
     <div class="cont-wrap">
         <div class="grid_12">
-            <h2 class="forum-title">@ViewBag.Title</h2>
             <div class="cont-outer">
                 <div class="table-post-outer">
                     <table class="table-post">
@@ -68,8 +67,11 @@
                                 <td class="center">
                                     <a asp-action="Show" asp-controller="Account" asp-route-id="@Thread.UserId" class="center">@await Html.ColorUserNameAsync(Thread.User)</a>
                                     <hr />
-                                    <p><img class="post-avatar" src="@Url.Action("Avatar", "Account", new { id = Thread.UserId })" /></p>
-                                    <p class="post-role"><span class="thread-label purple">@((await User.Manager.GetRolesAsync(Thread.User)).First())</span></p>
+                                    <p><img class="post-avatar" src="@Thread.User.AvatarUrl" /></p>
+                                    @if (await User.Manager.IsInAnyRolesAsync(Thread.User, "Root, Master"))
+                                    {
+                                        <p class="post-role"><span class="thread-label purple">@((await User.Manager.GetRolesAsync(Thread.User)).FirstOrDefault())</span></p>
+                                    }
                                 </td>
                                 <td>
                                     @if (Thread.IsAnnouncement)
@@ -122,9 +124,11 @@
                                     <td class="center">
                                         <a asp-action="Show" asp-controller="Account" asp-route-id="@x.UserId" class="center">@await Html.ColorUserNameAsync(x.User)</a>
                                         <hr />
-                                        <p><img class="post-avatar" src="@Url.Action("Avatar", "Account", new { id = x.UserId })" /></p>
-                                        <p class="post-role"><span class="thread-label purple">@((await User.Manager.GetRolesAsync(x.User)).First())</span></p>
-                                    </td>
+                                        <p><img class="post-avatar" src="@x.User.AvatarUrl" /></p>
+                                        @if (await User.Manager.IsInAnyRolesAsync(Thread.User, "Root, Master"))
+                                        {
+                                            <p class="post-role"><span class="thread-label purple">@((await User.Manager.GetRolesAsync(Thread.User)).FirstOrDefault())</span></p>
+                                        }                                    </td>
                                     <td>
                                         @if (Thread.UserId == x.UserId)
                                         {
@@ -162,7 +166,7 @@
                                             foreach (var y in x.SubPosts.OrderBy(z => z.Time))
                                             {
                                                 <div class="comment-item" data-id="@y.Id">
-                                                    <img class="comment-avatar" src="@Url.Action("Avatar", "Account", new { id = y.UserId })" />
+                                                    <img class="comment-avatar" src="@y.User.AvatarUrl" />
                                                     <div class="comment-content">
                                                         <p>
                                                             @if (await User.Manager.IsInAnyRolesAsync(y.User, "Root, Master"))
@@ -194,7 +198,7 @@
                 </div>
                 <br />
                 <div class="pager-outer">
-                    @Html.MakePaging()
+                    @Html.Paging()
                     <div class="clear"></div>
                 </div>
                 @if (User.IsSignedIn() && (!Thread.IsLocked || User.AnyRoles("Root, Master")))

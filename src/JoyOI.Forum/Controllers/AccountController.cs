@@ -54,9 +54,16 @@ namespace JoyOI.Forum.Controllers
                     await UserManager.CreateAsync(user, password);
                 }
 
+                var roles = await UserManager.GetRolesAsync(user);
+
                 if (authorizeResult.data.is_root)
                 {
-                    await UserManager.AddToRoleAsync(user, "Root");
+                    if (!roles.Any(x => x == "Root"))
+                        await UserManager.AddToRoleAsync(user, "Root");
+                }
+                else
+                {
+                    await UserManager.RemoveFromRoleAsync(user, "Root");
                 }
                 
                 await SignInManager.SignInAsync(user, true);

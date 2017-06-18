@@ -6,9 +6,16 @@
 <div class="container">
     <div class="cont-wrap">
         <div class="grid_12">
-            @foreach(var x in Model)
+            @foreach (var x in Model)
             {
-                <h2 class="forum-title">@x.Title</h2>
+                <div class="trapezoid-outer">
+                    <div class="trapezoid">
+                        <div class="trapezoid-main">
+                            <div class="trapezoid-inner">@x.Title</div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="cont-outer">
                     <table class="table table-forums">
                         <colgroup>
@@ -43,7 +50,7 @@
                                     <td class="hide-when-narrow">
                                         @if (y.LastPost != null)
                                         {
-                                            <img src="@Url.Action("Avatar", "Account", new { id = y.LastPost.UserId })" class="table-forums-avatar" />
+                                            <img src="@y.LastPost.User.AvatarUrl" class="table-forums-avatar" />
                                             <a asp-action="Thread" asp-controller="Forum" asp-route-id="@y.LastPost.ThreadId"><span class="table-forums-micro-title gray">@y.LastPost.FiltedContent</span></a>
                                             <div class="table-forums-micro-title"><a asp-action="Show" asp-controller="Account" asp-route-id="@y.LastPost.UserId">@await Html.ColorUserNameAsync(y.LastPost.User)</a> <span class="table-forums-lastrep-time">@@@y.LastPost.Time.ToString("yyyy-MM-dd HH:mm")</span></div>
                                         }
