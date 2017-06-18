@@ -4,6 +4,15 @@
     ViewBag.Title = Thread.Title;
 }
 
+@section Navigator {
+    <div class="columns">
+        <div class="location-path">
+            / <a href="/">JoyOI</a> / <a asp-action="Show" asp-controller="Forum" asp-route-id="@Thread.ForumId">@Thread.Forum.Title</a> /
+        </div>
+        <h1 class="location-current" data-emoji-enabled="">@Thread.Forum.Title</h1>
+    </div>
+}
+
 <div class="hidden" id="new-post-outer">
     <div id="new-post" class="new-comment">
         <p>发表回复</p>

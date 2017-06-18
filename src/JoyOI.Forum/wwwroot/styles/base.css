@@ -293,7 +293,7 @@ pre {
 .navbar-default .navbar-nav li a {
   font-size: 14px;
   text-transform: uppercase;
-  line-height: 64px;
+  line-height: 50px;
   padding: 0 21px;
   position: relative;
   color: #ffffff;
@@ -335,13 +335,14 @@ pre {
   -o-transform: scale(1, 1);
   transform: scale(1, 1);
 }
-.navbar-default .navbar-brand {
-  color: #ffffff;
-  font-size: 28px;
-  line-height: 34px;
-  height: 64px;
-  text-transform: uppercase;
-}
+    .navbar-default .navbar-brand {
+        color: #ffffff;
+        font-size: 20px;
+        padding: 0;
+        line-height: 50px;
+        height: 50px;
+        text-transform: uppercase;
+    }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
   color: #ffffff;
@@ -392,7 +393,7 @@ pre {
   margin-left: 24px;
 }
 .search-toggle-wrap .search-toggle {
-  line-height: 64px;
+  line-height: 50px;
   color: #ffffff;
 }
 .search-toggle-wrap .search-toggle i {
@@ -426,14 +427,15 @@ pre {
 	cover
 ====================================================*/
 .cover {
-  background-size: cover;
-  background-position: center;
   text-align: center;
   color: #ffffff;
   background-color: #512da8;
-  margin-top: -64px;
+  margin-top: -50px;
   background-image: url(../images/bg-cover.jpg);
+  background-repeat: repeat-x;
+  background-position: center top;
 }
+
 .cover .container {
   padding-top: 150px;
   padding-bottom: 100px;
@@ -514,7 +516,7 @@ pre {
   margin-right: 4px;
 }
 .cover-single {
-  padding: 70px 0;
+  padding: 110px 0;
 }
 /*====================================================
 	main content
@@ -1580,7 +1582,7 @@ pre {
     right: 62px;
   }
   .search-toggle-wrap .search-toggle {
-    line-height: 64px;
+    line-height: 50px;
     color: #464646;
   }
   .search-toggle-wrap .search-toggle:hover i {
@@ -2405,7 +2407,7 @@ hr {
 
 .comment-header {
     margin: 0 0 0 -10px;
-    padding: 5px 45px 5px 20px;
+    padding: 5px 50px 5px 20px;
     width: 240px;
     background: #FFF4DD url(../images/arw.gif) no-repeat 100% 50%;
     color: #F26C4F;
@@ -2556,3 +2558,33 @@ img {
     border-radius:50%;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
+
+.cover-url {
+    padding-top: 110px;
+    padding-bottom: 210px;
+    height: 320px;
+}
+
+.cover-url-inner {
+    bottom: 0px;
+    width: 100%;
+    height: 100px;
+    margin-top: 110px;
+    background: rgba(0,0,0,.5);
+}
+
+.columns {
+    margin-top: 12px;
+}
+
+    .columns, .columns a {
+        color: hsla(0,0%,100%,.6);
+    }
+
+        .columns a:hover {
+            color: rgba(255,255,255,0.95);
+        }
+
+        .columns h1 {
+            color: #dcf9c2
+        }

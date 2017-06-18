@@ -41,38 +41,52 @@
     </header>
     <!-- end header -->
 
-    <div class="cover cover-single">
-
-    </div>
-    <div class="main-content-area">
-        <div class="container">
-            @RenderBody()
-        </div>
-    </div>
-
-    @Html.Partial("_Footer")
-    <a href="#" id="back-to-top"><i class="fa fa-chevron-up"></i></a>
-    <div class="search-popup">
-        <div class="close-button">
-            <i class="material-icons">&#xE5C9;</i>
-        </div>
-        <div class="container popup-inner">
-            <div class="row">
-                <div class="col-sm-12">
-                    <form>
-                        <div class="input-group">
-                            <input type="email" class="required" id="search-input">
-                            <span class="bar"></span>
-                            <label>Type to search</label>
-                        </div>
-                        <!-- <input type="text"  placeholder="" /> -->
-                    </form>
-                    <div id="search-results">
-
-                    </div>
-                </div>
+    <div class="cover cover-single @(IsSectionDefined("Navigator") == false ? "" : "cover-url")">
+        <div class="cont-wrap">
+            <div class="grid_12" style="text-align:left">
+                <img src="~/images/logo.png" style="height:140px;margin-top:-60px;" />
             </div>
         </div>
-    </div>
+                @if (IsSectionDefined("Navigator"))
+                {
+                    <div class="cover-url-inner">
+                        <div class="cont-wrap">
+                            <div class="grid_12" style="text-align:left">
+                                @RenderSection("Navigator")
+                            </div>
+                            </div>
+                        </div>
+                            }
+                        </div>
+                        <div class="main-content-area">
+                            <div class="container">
+                                @RenderBody()
+                            </div>
+                        </div>
+
+                        @Html.Partial("_Footer")
+                        <a href="#" id="back-to-top"><i class="fa fa-chevron-up"></i></a>
+                        <div class="search-popup">
+                            <div class="close-button">
+                                <i class="material-icons">&#xE5C9;</i>
+                            </div>
+                            <div class="container popup-inner">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <form>
+                                            <div class="input-group">
+                                                <input type="email" class="required" id="search-input">
+                                                <span class="bar"></span>
+                                                <label>Type to search</label>
+                                            </div>
+                                            <!-- <input type="text"  placeholder="" /> -->
+                                        </form>
+                                        <div id="search-results">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 </body>
 </html>
