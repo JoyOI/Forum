@@ -2728,8 +2728,7 @@ td .comment-item:last-child {
 }
 
 .markdown-editor-outer {
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    border: none;
 }
 
 .markdown-editor {
@@ -2751,7 +2750,9 @@ td .comment-item:last-child {
     color: #888;
     font-size: 10px;
     padding: 5px 10px;
-    border-radius: 0 0 10px 10px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 
 .hidden {
@@ -2945,4 +2946,19 @@ img {
 
 .pagination > li > a {
     border-radius: 0 !important;
+}
+
+@media (max-width: 767px) {
+    .mobile-cover {
+        height: 300px;
+        overflow-y: hidden;
+    }
+
+        .mobile-cover .mobile-cover-center {
+            text-align: center !important;
+        }
+
+        .mobile-cover .mobile-cover-img {
+            margin-top: 0px !important;
+        }
 }

@@ -56,7 +56,7 @@ namespace JoyOI.Forum
             app.UseStaticFiles();
             app.UseDeveloperExceptionPage();
             app.UseIdentity();
-            app.UseBlobStorage("/assets/shared/scripts/jquery.pomelo.fileupload.js");
+            app.UseBlobStorage("/scripts/jquery.pomelo.fileupload.js");
             app.UseIdentity();
             app.UseStaticFiles();
             app.UseWebSockets();

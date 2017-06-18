@@ -21,7 +21,7 @@
             <div class="markdown-editor-outer">
                 <textarea class="textbox markdown-editor" name="Content"></textarea>
                 <div class="markdown-editor-bottom">
-                    <a href="javascript:NewPost()">发表回复</a>
+                    <a href="javascript:NewPost();">发表回复</a>
                     <a href="javascript:$('#new-post-outer').append($('#new-post'))">取消回复</a>
                     支持Markdown语法、拖拽图片文件至编辑区或直接从剪贴板粘贴可上传图片文件。
                 </div>
@@ -273,14 +273,25 @@
     {
         popResult("正在发表回复...");
         $('#new-post-outer').append($('#new-post'));
+        $('#frmNewPost .markdown-editor').val($('#frmNewPost .markdown-editor')[0].smde.value());
         $.post($('#frmNewPost').attr('action'), $('#frmNewPost').serialize(), function (data) {
-            render.Post(data, function () { popResult('发表成功'); $('.markdown-editor').val(''); });
+            render.Post(data, function () {
+                popResult('发表成功');
+                $('.markdown-editor').val('');
+                $('#frmNewPost .markdown-editor[name="Content"]')[0].smde.value("")
+            });
         });
     }
+
     $("#btnReply").click(function () {
         popResult("正在发表回复...");
+        $('#frmNewReply .markdown-editor[name="Content"]').val($('#frmNewReply .markdown-editor[name="Content"]')[0].smde.value());
         $.post($('#frmNewReply').attr('action'), $('#frmNewReply').serialize(), function (data) {
-            render.Post(data, function () { popResult('发表成功'); $('.markdown-editor').val(''); });
+            render.Post(data, function () {
+                popResult('发表成功');
+                $('.markdown-editor').val('');
+                $('#frmNewReply .markdown-editor[name="Content"]')[0].smde.value("")
+            });
         });
     });
 
@@ -288,10 +299,12 @@
     {
         $('.thread-content').hide();
         $('.thread-edit').show();
+        $('#txtEditThread')[0].smde.value($('#txtEditThread').val());
     }
 
     function EditThreadSubmit() {
         popResult("正在提交...");
+        $('#frmEditThread .markdown-editor[name="Content"]').val($('#frmEditThread .markdown-editor[name="Content"]')[0].smde.value());
         $.post($('#frmEditThread').attr('action'), $('#frmEditThread').serialize(), function (data) {
             $('.thread-content').html(data);
             $('.thread-content').show();
@@ -313,13 +326,14 @@
         $('.post-edit').show();
         $('#post-edit-id').val(pid);
         $.get('@Url.Action("PostContent", "Render")', { id: pid }, function (data) { 
-            $('#txtEditPost').val(data);
             $('tr[data-id="' + pid + '"]').children('td').last().children('.post-edit').append($('#edit-post'));
+            $('#txtEditPost')[0].smde.value(data);
         });
     }
 
     function EditPostSubmit() {
         popResult("正在提交...");
+        $('#frmEditPost #txtEditPost').val($('#frmEditPost #txtEditPost')[0].smde.value());
         $.post($('#frmEditPost').attr('action'), $('#frmEditPost').serialize(), function (data) {
             $('#edit-post-outer').append($('#edit-post'));
             $('[data-id="' + $('#post-edit-id').val() + '"] .post-content').html(data);
