@@ -45,7 +45,7 @@
     <div class="cover cover-single mobile-cover @(IsSectionDefined("Navigator") == false ? "" : "cover-url")">
         <div class="cont-wrap">
             <div class="grid_12 mobile-cover-center" style="text-align:left">
-                <img src="~/images/logo.png" class="mobile-cover-img" style="height:140px;margin-top:-60px;" />
+                <img src="~/images/logo.png" style="height:140px;margin-top:-60px;" />
             </div>
         </div>
         @if (IsSectionDefined("Navigator"))
@@ -59,7 +59,7 @@
             </div>
         }
     </div>
-    <div class="main-content-area main-content-area-margin">
+    <div class="main-content-area">
         <div class="container">
             @RenderBody()
         </div>

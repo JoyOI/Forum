@@ -1802,22 +1802,22 @@ pre {
 }
 @media (max-width: 767px) {
     .mobile-cover {
-        height: 300px;
-        /*overflow-y: hidden;*/
+        height: 320px;
+        overflow-y: hidden;
     }
-
+    
+    .mobile-cover:not(.cover-url-inner) > .cont-wrap {
+        margin-top: 10%;
+    }
+    .mobile-cover > .cont-wrap {
+        margin-top: 0px !important;
+    }
     .mobile-cover .mobile-cover-center {
         text-align: center !important;
     }
-
-    .mobile-cover .mobile-cover-img {
-        margin-top: 0px !important;
-    }
-    .cover-url-inner {
-        margin-top: 70px !important;
-    }
-    .main-content-area-margin {
-        padding-top: 128px !important;
+    
+    .mobile-cover > .cont-wrap + .cover-url-inner {
+        margin-top: 30px !important;
     }
 }
 @media (max-width: 767px) {
