@@ -2977,3 +2977,9 @@ img {
     text-align: center;
     border:1px solid #ddd;
 }
+
+td i {
+    font-size:20px!important;
+    line-height: 20px!important;
+    display: inline!important;
+}
