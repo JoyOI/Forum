@@ -2983,3 +2983,139 @@ td i {
     line-height: 20px!important;
     display: inline!important;
 }
+
+.profile-content {
+    position: relative;
+    z-index: 2;
+    margin-top: -30px;
+    box-shadow: 0 0.375rem 1.375rem rgba(181,201,175,.5);
+}
+
+.profile-header {
+    background: #637d4b;
+    padding: 30px 20px 0 20px;
+    background-position: 50% !important;
+    background-size: cover !important;
+    min-height: 220px;
+}
+
+.profile-avatar {
+    border-radius: 50%;
+}
+
+.profile-avatar-outer {
+    padding-right: 1.875rem;
+    display: table-cell;
+    vertical-align: middle;
+    height: 120px;
+}
+
+.profile-body {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    box-sizing: inherit;
+    height: 120px;
+}
+
+.profile-body h1 {
+    font-family: Open Sans,Seravek,Segoe UI,Verdana,PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,"sans-serif";
+    font-weight: 300;
+    line-height: 40px;
+    color: #fff;
+}
+
+    .profile-body h1 small {
+        font-size: .9em;
+        line-height: 40px;
+        color: hsla(0,0%,100%,.8);
+        margin-bottom: 0;
+    }
+
+    .profile-body p {
+        line-height: 30px;
+        color: #fff;
+        margin-bottom: 0;
+    }
+
+.profile-tabs {
+    color: hsla(0,0%,100%,.9);
+    border-radius: 1px 1px 0 0;
+    cursor: pointer
+}
+
+.profile-tabs-ul {
+    padding: 10px 20px 0 20px;
+    overflow: hidden;
+    list-style: none;
+    margin: 0;
+    display: block;
+}
+
+.profile-tabs-item {
+    color: hsla(0,0%,100%,.9);
+    border-radius: 1px 1px 0 0;
+    cursor: pointer;
+    float: left;
+    font-size: 16px;
+    line-height: 35px;
+    height: 35px;
+    padding: 0 20px;
+    margin-right: 10px;
+    margin: 0;
+    display: list-item;
+    text-align: -webkit-match-parent;
+    font-weight: 400;
+}
+
+    .profile-tabs-item.active {
+        background: #fff;
+        color: #666;
+        box-shadow: 0 0 10px rgba(0,0,0,.3);
+    }
+
+.profile-tabs-outer {
+    position: relative;
+    z-index: 2;
+    margin-top: -45px;
+}
+
+.profile-tabs-section {
+    padding: 30px 20px;
+    background: #fff;
+}
+
+.profile-statistics {
+    padding: 30px 20px;
+    background: #fff;
+    box-shadow: 0 0.375rem 1.375rem rgba(181,201,175,.5);
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+
+.profile-sidebar {
+    margin-top: -30px;
+}
+
+.profile-statistics-number {
+    text-align: center;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.profile-statistics-number-outer {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.profile-statistics-number-count {
+    font-size: 20px;
+}
+
+.profile-statistics-number-text {
+    font-size: 13px;
+    margin-top: 10px;
+    color: #aaa;
+}

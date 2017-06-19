@@ -15,6 +15,8 @@ namespace JoyOI.Forum.Controllers
 {
     public class AccountController : BaseController
     {
+        private static Random _random = new Random();
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -102,10 +104,10 @@ namespace JoyOI.Forum.Controllers
             });
         }
 
-        [Route("Account/{id:Guid}")]
-        public IActionResult Show(Guid id)
+        [Route("Account/{id}")]
+        public IActionResult Show(string id)
         {
-            var user = DB.Users.Where(x => x.Id == id).SingleOrDefault();
+            var user = DB.Users.Where(x => x.UserName == id).SingleOrDefault();
             if (user == null)
                 return Prompt(x =>
                 {
@@ -114,14 +116,15 @@ namespace JoyOI.Forum.Controllers
                     x.StatusCode = 404;
                 });
 
+            ViewBag.ImageId = _random.Next() % 21 + 1;
             return View(user);
         }
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Edit(Guid id)
+        public async Task<IActionResult> Edit(string id)
         {
-            var user = DB.Users.Where(x => x.Id == id).SingleOrDefault();
+            var user = DB.Users.Where(x => x.UserName == id).SingleOrDefault();
             if (user == null)
                 return Prompt(x =>
                 {
@@ -137,7 +140,7 @@ namespace JoyOI.Forum.Controllers
                     x.Details = "您的权限不足以编辑该用户，请使用更高权限帐号执行本操作。";
                     x.StatusCode = 403;
                 });
-            if (User.Current.Id != id && !User.AnyRoles("Root, Master"))
+            if (User.Current.UserName != id && !User.AnyRoles("Root, Master"))
                 return Prompt(x =>
                 {
                     x.Title = "没有权限";
@@ -150,10 +153,10 @@ namespace JoyOI.Forum.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, IFormFile avatar, User Model)
+        public async Task<IActionResult> Edit(string id, IFormFile avatar, User Model)
         {
             var user = DB.Users
-                .Where(x => x.Id == id).SingleOrDefault();
+                .Where(x => x.UserName == id).SingleOrDefault();
             if (user == null)
                 return Prompt(x =>
                 {
@@ -169,7 +172,7 @@ namespace JoyOI.Forum.Controllers
                     x.Details = "您的权限不足以编辑该用户，请使用更高权限帐号执行本操作。";
                     x.StatusCode = 403;
                 });
-            if (User.Current.Id != id && !User.AnyRoles("Root, Master"))
+            if (User.Current.UserName != id && !User.AnyRoles("Root, Master"))
                 return Prompt(x =>
                 {
                     x.Title = "没有权限";

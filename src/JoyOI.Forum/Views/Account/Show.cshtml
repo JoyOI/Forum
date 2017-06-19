@@ -3,48 +3,98 @@
     ViewBag.Title = Model.UserName;
 }
 
+@section Navigator {
+    <div class="columns">
+        <div class="location-path">
+            / <a href="/">JoyOI</a> /
+        </div>
+        <h1 class="location-current" data-emoji-enabled="">用户资料</h1>
+    </div>
+}
+
 <div class="container">
     <div class="cont-wrap">
         <div class="grid_9">
-            <h2 class="exp-title">@ViewBag.Title</h2>
-            <h3 class="exp-sub-title">基本资料</h3>
-            <div class="cont-outer">
-                <table class="detail-table no-border">
-                    <tr>
-                        <td class="row-title">UID</td>
-                        <td>@Model.Id</td>
-                    </tr>
-                    <tr>
-                        <td class="row-title">用户名</td>
-                        <td>@await Html.ColorUserNameAsync(Model)</td>
-                    </tr>
-                    <tr>
-                        <td class="row-title">用户组</td>
-                        <td>
-                            @foreach (var x in await User.Manager.GetRolesAsync(Model))
-                            {
-                                <span>@x</span>
-                            }
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="row-title">Email</td>
-                        <td>@Model.Email.Replace("@", "#")</td>
-                    </tr>
-                    <tr>
-                        <td class="row-title">注册时间</td>
-                        <td>@Model.RegisteryTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                    </tr>
-                    @if (!string.IsNullOrEmpty(Model.Motto))
-                    {
-                        <tr>
-                            <td class="row-title">个性签名</td>
-                            <td>@Model.Motto</td>
-                        </tr>
-                    }
-                </table>
+            <div class="profile-content">
+                <div class="section visible">
+                    <div class="profile-header" style="background: url(/images/@(ViewBag.ImageId).jpg)">
+                        <div class="profile-avatar-outer">
+                            <img src="@Model.AvatarUrl" width="120" height="120" class="profile-avatar">
+                        </div>
+                        <div class="profile-body">
+                            <h1>mrkrnblsa <small>(UID: 117344) Other</small></h1>
+                            <p>
+                                注册于 <span class="time relative" data-timestamp="1494749604" data-tooltip="2017-05-14 16:13:24" datetime="1494749604000">1月前</span>,
+                                最后登录于 <span class="time relative" data-timestamp="1497865528" data-tooltip="2017-06-19 17:45:28" datetime="1497865528000">1小时前</span>,
+                                最后活动于 <span class="time relative" data-timestamp="1497872853" data-tooltip="2017-06-19 19:47:33" datetime="1497872853000">2分钟后</span>.
+                            </p>
+                            <p>解决了 12 道题目，RP: 182.13 (No. 7378)</p>
+                        </div>
+                    </div>
+                    <div class="profile-tabs-outer">
+                        <div class="profile-tabs">
+                            <ul class="profile-tabs-ul">
+                                <li class="profile-tabs-item active">递交 (231)</li>
+                                <li class="profile-tabs-item">题目 (0)</li>
+                                <li class="profile-tabs-item">题解 (1)</li>
+                                <li class="profile-tabs-item">讨论 (7)</li>
+                            </ul>
+
+                            <div class="profile-tabs-section">
+                                <div class="section__tab-main">
+                                    <p><a href="/records?uid_or_name=117344">所有递交</a></p>
+                                    <p><a href="/records/5947b9d4d3d8a11127af384f">R5947b9d4d3d8a11127af384f</a></p>
+                                    <p><a href="/records/5947b48bd3d8a11127af3847">R5947b48bd3d8a11127af3847</a></p>
+                                    <p><a href="/records/5947b406d3d8a11127af3846">R5947b406d3d8a11127af3846</a></p>
+                                    <p><a href="/records/5947b302d3d8a11127af3845">R5947b302d3d8a11127af3845</a></p>
+                                    <p><a href="/records/5947ad25d3d8a11127af383e">R5947ad25d3d8a11127af383e</a></p>
+                                    <p><a href="/records/5947acd6d3d8a11127af383c">R5947acd6d3d8a11127af383c</a></p>
+                                    <p><a href="/records/5947aa6fd3d8a11127af383a">R5947aa6fd3d8a11127af383a</a></p>
+                                    <p><a href="/records/5947a79fd3d8a11127af3839">R5947a79fd3d8a11127af3839</a></p>
+                                    <p><a href="/records/59479e22d3d8a11127af3836">R59479e22d3d8a11127af3836</a></p>
+                                    <p><a href="/records/59479c1ed3d8a11127af3835">R59479c1ed3d8a11127af3835</a></p>
+                                </div><div class="section__tab-main" style="display: none;">
+                                </div><div class="section__tab-main" style="display: none;">
+                                    <p><a href="/p/1009/solution">PS593a37f3d3d8a1425c417b18</a></p>
+                                </div><div class="section__tab-main" style="display: none;">
+                                    <p><a href="/discuss/593b51d8d3d8a1425c417cd5">许多许多条建议</a></p>
+                                    <p><a href="/discuss/593a7f9cd3d8a1425c417be3">建议解决一下这个似乎是有关搜索引擎的问题</a></p>
+                                    <p><a href="/discuss/593490e1d3d8a1425c417342">好像炸了。。。</a></p>
+                                    <p><a href="/discuss/5923ba55d3d8a17e55ed69c4">第三个点的数据？</a></p>
+                                    <p><a href="/discuss/5922c730d3d8a17e55ed6885">求本题0ms方法。。。</a></p>
+                                    <p><a href="/discuss/591ee6ebd3d8a17e55ed5dfa">求数据！！！</a></p>
+                                    <p><a href="/discuss/5920f510d3d8a17e55ed64b5">评测机啊。。。</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
             </div>
         </div>
-        @Html.Partial("Sidebar")
+
+        <div class="grid_3">
+            <div class="profile-sidebar">
+                <div class="profile-statistics">
+                    <div class="profile-statistics-number-outer">
+                        <div class="profile-statistics-number">
+                            <div class="profile-statistics-number-count">10</div>
+                            <div class="profile-statistics-number-text">已通过</div>
+                        </div>
+                    </div>
+                    <div class="profile-statistics-number-outer">
+                        <div class="profile-statistics-number">
+                            <div class="profile-statistics-number-count">10</div>
+                            <div class="profile-statistics-number-text">已通过</div>
+                        </div>
+                    </div>
+                    <div class="profile-statistics-number-outer">
+                        <div class="profile-statistics-number">
+                            <div class="profile-statistics-number-count">10</div>
+                            <div class="profile-statistics-number-text">已通过</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
