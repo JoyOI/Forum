@@ -3168,3 +3168,9 @@ td i {
         width: calc(62% - 55px);
         margin: 5px 0 5px 0;
     }
+
+.thread-avatar {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+}
