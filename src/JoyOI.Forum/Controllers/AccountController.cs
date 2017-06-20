@@ -69,6 +69,8 @@ namespace JoyOI.Forum.Controllers
                 }
                 
                 await SignInManager.SignInAsync(user, true);
+                user.LastLoginTime = DateTime.Now;
+                DB.SaveChanges();
 
                 return string.IsNullOrEmpty(Referer) ? (IActionResult)RedirectToAction("Index", "Home") : (IActionResult)Redirect(Referer);
             }
@@ -103,9 +105,8 @@ namespace JoyOI.Forum.Controllers
                 x.HideBack = true;
             });
         }
-
-        [Route("Account/{id}")]
-        public IActionResult Show(string id)
+        
+        public async Task<IActionResult> Profile(string id)
         {
             var user = DB.Users.Where(x => x.UserName == id).SingleOrDefault();
             if (user == null)
@@ -117,6 +118,9 @@ namespace JoyOI.Forum.Controllers
                 });
 
             ViewBag.ImageId = _random.Next() % 21 + 1;
+            ViewBag.Role = (await User.Manager.GetRolesAsync(user)).FirstOrDefault() ?? "Member";
+            ViewBag.TotalThreads = DB.Threads.Count(x => x.UserId == user.Id);
+            ViewBag.TotalPosts = DB.Posts.Count(x => x.UserId == user.Id);
             return View(user);
         }
 

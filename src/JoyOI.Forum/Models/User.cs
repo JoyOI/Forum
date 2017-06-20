@@ -23,5 +23,9 @@ namespace JoyOI.Forum.Models
 
         [MaxLength(256)]
         public string AvatarUrl { get; set; }
+
+        public DateTime ActiveTime { get; set; } = DateTime.Now;
+
+        public DateTime LastLoginTime { get; set; } = DateTime.Now;
     }
 }

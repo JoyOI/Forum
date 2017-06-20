@@ -6,7 +6,7 @@
     <ul class="nav navbar-nav navbar-right">
         @if (User.IsSignedIn())
         {
-        <li class="center"><a asp-action="Show" asp-controller="Account" asp-route-id="@User.Current.UserName">会员中心</a></li>
+        <li class="center"><a asp-action="Profile" asp-controller="Account" asp-route-id="@User.Current.UserName">会员中心</a></li>
         @if (User.AnyRoles("Root"))
         {
         <li class="center"><a asp-action="Forum" asp-controller="Admin" asp-route-id="@User.Current.Id">板块管理</a></li>

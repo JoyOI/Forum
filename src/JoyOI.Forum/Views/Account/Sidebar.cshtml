@@ -1,9 +1,9 @@
 ﻿@model User
 <div class="grid_3">
     <p class="center"><img class="sidebar-avatar" src="@Model.AvatarUrl" style="width: 100%;" /></p>
-    <p class="center"><a asp-controller="Account" asp-action="Show" asp-route-id="@Model.Id">@await Html.ColorUserNameAsync(Model, "sidebar-username")</a></p>
+    <p class="center"><a asp-controller="Account" asp-action="Profile" asp-route-id="@Model.Id">@await Html.ColorUserNameAsync(Model, "sidebar-username")</a></p>
     <div class="sidebar-nobg">
-        <p><a asp-controller="Account" asp-action="Show" asp-route-id="@Model.Id"><i class="fa fa-angle-double-right"></i> TA的资料</a></p>
+        <p><a asp-controller="Account" asp-action="Profile" asp-route-id="@Model.Id"><i class="fa fa-angle-double-right"></i> TA的资料</a></p>
         @if (User.Current.Id == Model.Id)
         {
             <p><a asp-controller="Account" asp-action="Message" asp-route-id="@Model.Id"><i class="fa fa-angle-double-right"></i> 站内信</a></p>

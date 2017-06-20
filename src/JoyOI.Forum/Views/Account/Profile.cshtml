@@ -22,11 +22,11 @@
                             <img src="@Model.AvatarUrl" width="120" height="120" class="profile-avatar">
                         </div>
                         <div class="profile-body">
-                            <h1>mrkrnblsa <small>(UID: 117344) Other</small></h1>
+                            <h1>@Model.UserName <small>(@ViewBag.Role)</small></h1>
                             <p>
-                                注册于 <span class="time relative" data-timestamp="1494749604" data-tooltip="2017-05-14 16:13:24" datetime="1494749604000">1月前</span>,
-                                最后登录于 <span class="time relative" data-timestamp="1497865528" data-tooltip="2017-06-19 17:45:28" datetime="1497865528000">1小时前</span>,
-                                最后活动于 <span class="time relative" data-timestamp="1497872853" data-tooltip="2017-06-19 19:47:33" datetime="1497872853000">2分钟后</span>.
+                                注册于 <span class="time relative" datetime="@Model.RegisteryTime.ToTimeStamp()"></span>,
+                                最后登录于 <span class="time relative" datetime="@Model.LastLoginTime.ToTimeStamp()"></span>,
+                                最后活动于 <span class="time relative" datetime="@Model.ActiveTime.ToTimeStamp()"></span>.
                             </p>
                             <p>解决了 12 道题目，RP: 182.13 (No. 7378)</p>
                         </div>
@@ -77,22 +77,30 @@
                 <div class="profile-statistics">
                     <div class="profile-statistics-number-outer">
                         <div class="profile-statistics-number">
-                            <div class="profile-statistics-number-count">10</div>
-                            <div class="profile-statistics-number-text">已通过</div>
+                            <div class="profile-statistics-number-count">@ViewBag.TotalThreads</div>
+                            <div class="profile-statistics-number-text">主题</div>
                         </div>
                     </div>
                     <div class="profile-statistics-number-outer">
                         <div class="profile-statistics-number">
-                            <div class="profile-statistics-number-count">10</div>
-                            <div class="profile-statistics-number-text">已通过</div>
+                            <div class="profile-statistics-number-count">@ViewBag.TotalPosts</div>
+                            <div class="profile-statistics-number-text">回复</div>
                         </div>
                     </div>
-                    <div class="profile-statistics-number-outer">
-                        <div class="profile-statistics-number">
-                            <div class="profile-statistics-number-count">10</div>
-                            <div class="profile-statistics-number-text">已通过</div>
-                        </div>
-                    </div>
+                </div>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-header">
+                    <h1>联系</h1>
+                </div>
+                <div class="sidebar-section-body">
+                    <dl>
+                        <dt>电子邮件</dt>
+                        <dd>@Model.Email.Replace("@", "[at]")</dd>
+                        <dt>QQ</dt>
+                        <dd><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=935683004&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:935683004:52" alt="点击这里与我聊天" title="点击这里与我聊天"></a> 935683004</dd>
+                    </dl>
+                    <div class="clear"></div>
                 </div>
             </div>
         </div>

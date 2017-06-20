@@ -7,7 +7,7 @@
 
 <tr data-id="@x.Id">
     <td class="center">
-        <a asp-action="Show" asp-controller="Account" asp-route-id="@x.UserId" class="center">@await Html.ColorUserNameAsync(x.User)</a>
+        <a asp-action="Profile" asp-controller="Account" asp-route-id="@x.User.UserName" class="center">@await Html.ColorUserNameAsync(x.User)</a>
         <hr />
         <p><img class="post-avatar" src="@x.User.AvatarUrl" /></p>
         <p class="post-role"><span class="thread-label purple">@((await User.Manager.GetRolesAsync(x.User)).First())</span></p>
@@ -60,7 +60,7 @@
                             {
                                 <span class="thread-label">楼主</span>
                             }
-                            <a asp-action="Show" asp-controller="Account" asp-route-id="@y.UserId" class="center">@await Html.ColorUserNameAsync(y.User)</a>
+                            <a asp-action="Profile" asp-controller="Account" asp-route-id="@y.User.Name" class="center">@await Html.ColorUserNameAsync(y.User)</a>
                             <span class="table-post-time">@@@y.Time.ToString("yyyy-MM-dd HH:mm:ss")</span>
                             @if (User.IsSignedIn() && (y.UserId == User.Current.Id || User.AnyRoles("Root, Master")))
                             {

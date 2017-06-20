@@ -18,7 +18,7 @@
                 { 
                     <div class="message">
                         <img src="/file/download/@x.Sender.AvatarId" class="message-avatar" />
-                        <div><a asp-action="Show" asp-controller="Account" asp-route-id="@x.SenderId"></a> @x.Time.ToString("yyyy-MM-dd HH:mm")</div>
+                        <div><a asp-action="Profile" asp-controller="Account" asp-route-id="@x.SenderId"></a> @x.Time.ToString("yyyy-MM-dd HH:mm")</div>
                         <div>@x.Content</div>
                         <div><a asp-action="SendMessage" asp-controller="Account" asp-route-id="@User.Current.Id" asp-route-receiver="@x.Sender.UserName">回信</a></div>
                     </div>

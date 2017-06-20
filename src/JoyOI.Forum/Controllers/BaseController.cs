@@ -18,6 +18,12 @@ namespace JoyOI.Forum.Controllers
                 .OrderByDescending(x => x.CreationTime)
                 .Take(5)
                 .ToList();
+
+            if (User.Current != null && User.Current.ActiveTime.AddMinutes(1) < DateTime.Now)
+            {
+                User.Current.ActiveTime = DateTime.Now;
+                DB.SaveChanges();
+            }
         }
 
         [Inject]
