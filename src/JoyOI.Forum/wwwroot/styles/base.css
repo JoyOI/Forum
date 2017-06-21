@@ -3164,7 +3164,7 @@ td i {
     .mobile-cover {
         height: 300px;
         overflow-y: hidden;
-        margin-top: 60px!important;
+        margin-top: 50px!important;
     }
 
         .mobile-cover .mobile-cover-center {
@@ -3185,4 +3185,19 @@ td i {
         .cover-url-inner .columns {
             margin-top: 0;
         }
+
+    .navbar-logo {
+        margin-left: 20px;
+        width: 68px!important;
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+}
+
+.mobile-menu {
+    font-size: 16px!important;
+    line-height: 32px;
+    margin-right: 5px;
 }
