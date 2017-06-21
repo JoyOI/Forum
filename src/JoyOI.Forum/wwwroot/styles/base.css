@@ -3194,6 +3194,10 @@ td i {
     .navbar-nav {
         text-align: center;
     }
+
+    .navbar-left {
+        border-bottom: 1px solid #ddd;
+    }
 }
 
 .mobile-menu {
