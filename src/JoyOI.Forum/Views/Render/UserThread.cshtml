@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Thread>
+@{ 
+    Layout = null;
+}
+
+<div>
+    <table class="table table-no-shadow">
+        <thead>
+            <tr>
+                <th>主题</th>
+                <th>发表时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <td><a asp-action="Thread" asp-controller="Forum" asp-route-id="@x.Id">@x.Title</a></td>
+                    <td datetime="@x.CreationTime.ToTimeStamp()"></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @Html.Paging()
+</div>

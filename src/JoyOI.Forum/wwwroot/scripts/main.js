@@ -1,4 +1,4 @@
-/*====================================================
+﻿/*====================================================
   TABLE OF CONTENT
   1. function declearetion
   2. Initialization
@@ -249,3 +249,42 @@ function popResult(txt) {
         }, 400);
     }, 2600);
 }
+
+function openTab(selector, openId, action, page)
+{
+    if (!page) {
+        $('.profile-tabs-section').hide();
+    }
+    $(selector).html('');
+    $.get('/Render/' + action + '/' + openId, { p: page || 1 }, function (data) {
+        var html = $(data);
+        var anchors = html.children('ul').find('a');
+        for (var i = 0; i < anchors.length; i++) {
+            var dom = $(anchors[i]);
+            var _page = dom.attr('href').substr(dom.attr('href').lastIndexOf('?p=') + 3);
+            if (_page == page && dom.text() != '«' && dom.text() != '»') {
+                dom.parent().addClass('active');
+            }
+            dom.attr('href', 'javascript:;');
+            dom.unbind('click').bind('click', function () {
+                openTab(selector, openId, action, _page);
+                return false;
+            });
+        }
+        html.appendTo($(selector));
+        $(selector).show();
+    });
+}
+
+$(document).ready(function () {
+    $('.profile-tabs-item').click(function () {
+        $('.profile-tabs-item').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    var tabs = $('.profile-tabs-item');
+    if (tabs.length > 0)
+    {
+        $(tabs[0]).click();
+    }
+});
