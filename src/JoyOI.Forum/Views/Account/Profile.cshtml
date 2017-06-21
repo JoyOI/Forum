@@ -24,9 +24,9 @@
                         <div class="profile-body">
                             <h1>@Model.UserName <small>(@ViewBag.Role)</small></h1>
                             <p>
-                                注册于 <span class="time relative" datetime="@Model.RegisteryTime.ToTimeStamp()"></span>,
-                                最后登录于 <span class="time relative" datetime="@Model.LastLoginTime.ToTimeStamp()"></span>,
-                                最后活动于 <span class="time relative" datetime="@Model.ActiveTime.ToTimeStamp()"></span>.
+                                注册于 <span class="time relative" datetime="@Model.RegisteryTime.ToTimeStamp()">@Model.RegisteryTime</span>,
+                                最后登录于 <span class="time relative" datetime="@Model.LastLoginTime.ToTimeStamp()">@Model.LastLoginTime</span>,
+                                最后活动于 <span class="time relative" datetime="@Model.ActiveTime.ToTimeStamp()">@Model.ActiveTime</span>.
                             </p>
                             <p>解决了 12 道题目，RP: 182.13 (No. 7378)</p>
                         </div>
@@ -35,7 +35,7 @@
                         <div class="profile-tabs">
                             <ul class="profile-tabs-ul">
                                 <li class="profile-tabs-item" onclick="openTab('#tab-threads', '@Model.Id', 'UserThread')">主题 (@ViewBag.TotalThreads)</li>
-                                <li class="profile-tabs-item" onclick="openTab('#tab-posts')">回复 (@ViewBag.TotalPosts)</li>
+                                <li class="profile-tabs-item" onclick="openTab('#tab-posts', '@Model.Id', 'UserPost')">回复 (@ViewBag.TotalPosts)</li>
                                 <li class="profile-tabs-item">修改密码</li>
                             </ul>
 
@@ -77,8 +77,6 @@
                     <dl>
                         <dt>电子邮件</dt>
                         <dd>@Model.Email.Replace("@", "[at]")</dd>
-                        <dt>QQ</dt>
-                        <dd><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=935683004&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:935683004:52" alt="点击这里与我聊天" title="点击这里与我聊天"></a> 935683004</dd>
                     </dl>
                     <div class="clear"></div>
                 </div>

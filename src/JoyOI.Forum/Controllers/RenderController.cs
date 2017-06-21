@@ -67,7 +67,15 @@ namespace JoyOI.Forum.Controllers
         {
             return PagedView(DB.Threads
                 .Where(x => x.UserId == id)
-                .OrderByDescending(x => x.CreationTime));
+                .OrderByDescending(x => x.CreationTime), 10);
+        }
+
+        public IActionResult UserPost(Guid id)
+        {
+            return PagedView(DB.Posts
+                .Include(x => x.Thread)
+                .Where(x => x.UserId == id)
+                .OrderByDescending(x => x.Time), 10);
         }
     }
 }

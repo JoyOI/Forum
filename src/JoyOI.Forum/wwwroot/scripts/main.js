@@ -256,24 +256,30 @@ function openTab(selector, openId, action, page)
         $('.profile-tabs-section').hide();
     }
     $(selector).html('');
-    $.get('/Render/' + action + '/' + openId, { p: page || 1 }, function (data) {
-        var html = $(data);
-        var anchors = html.children('ul').find('a');
-        for (var i = 0; i < anchors.length; i++) {
-            var dom = $(anchors[i]);
-            var _page = dom.attr('href').substr(dom.attr('href').lastIndexOf('?p=') + 3);
-            if (_page == page && dom.text() != '«' && dom.text() != '»') {
-                dom.parent().addClass('active');
+    if (action) {
+        $.get('/Render/' + action + '/' + openId, { p: page || 1 }, function (data) {
+            var html = $(data);
+            var anchors = html.children('ul').find('a');
+            for (var i = 0; i < anchors.length; i++) {
+                var dom = $(anchors[i]);
+                var _page = dom.attr('href').substr(dom.attr('href').lastIndexOf('?p=') + 3);
+                if (_page == page && dom.text() != '«' && dom.text() != '»') {
+                    dom.parent().addClass('active');
+                }
+                dom.attr('href', 'javascript:;');
+                dom.unbind('click').bind('click', function () {
+                    openTab(selector, openId, action, _page);
+                    return false;
+                });
             }
-            dom.attr('href', 'javascript:;');
-            dom.unbind('click').bind('click', function () {
-                openTab(selector, openId, action, _page);
-                return false;
-            });
-        }
-        html.appendTo($(selector));
+            html.appendTo($(selector));
+            $(selector).show();
+        });
+    }
+    else
+    {
         $(selector).show();
-    });
+    }
 }
 
 $(document).ready(function () {
