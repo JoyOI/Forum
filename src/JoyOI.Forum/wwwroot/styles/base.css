@@ -1805,12 +1805,12 @@ pre {
         height: 320px;
         overflow-y: hidden;
     }
-    
-    .mobile-cover:not(.cover-url-inner) > .cont-wrap {
-        margin-top: 10%;
+
+    .mobile-cover > .cont-wrap-center {
+        margin-top: 0px !important;
     }
     .mobile-cover > .cont-wrap {
-        margin-top: 0px !important;
+        margin-top: 60px;
     }
     .mobile-cover .mobile-cover-center {
         text-align: center !important;

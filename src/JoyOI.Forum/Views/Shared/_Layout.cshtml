@@ -89,5 +89,21 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            function initContWrap() {
+                if ($(".cover-url-inner").length > 0) {
+                    $(".cont-wrap").addClass('cont-wrap-center');
+
+                } else {
+                    $(".cont-wrap").removeClass('cont-wrap-center');
+
+                }
+
+            }
+            initContWrap();
+
+        })
+    </script>
 </body>
 </html>
