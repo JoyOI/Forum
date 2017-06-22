@@ -255,8 +255,8 @@ function openTab(selector, openId, action, page)
     if (!page) {
         $('.profile-tabs-section').hide();
     }
-    $(selector).html('');
     if (action) {
+        $(selector).html('');
         $.get('/Render/' + action + '/' + openId, { p: page || 1 }, function (data) {
             var html = $(data);
             var anchors = html.children('ul').find('a');

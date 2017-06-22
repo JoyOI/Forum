@@ -45,13 +45,16 @@
                             <div class="profile-tabs-section" id="tab-posts"></div>
                             <div class="profile-tabs-section" id="tab-role">
                                 <form asp-action="Role" asp-controller="Account" asp-route-id="@Model.Id">
-                                    <select class="form-control" name="role">
-                                        @{
-                                            var isMaster = await User.Manager.IsInRoleAsync(Model, "Master");
-                                        }
-                                        <!option @(isMaster ? "selected" : "")>Master</!option>
-                                        <!option @(!isMaster ? "selected" : "")>Member</!option>
-                                    </select>
+                                    <p>
+                                        <select class="form-control" name="role">
+                                            @{
+                                                var isMaster = await User.Manager.IsInRoleAsync(Model, "Master");
+                                            }
+                                            <!option @(!isMaster ? "selected" : "")>Member</!option>
+                                            <!option @(isMaster ? "selected" : "")>Master</!option>
+                                        </select>
+                                    </p>
+                                    <p><input type="submit" value="提交" class="btn btn-default" /></p>
                                 </form>
                             </div>
                         </div>

@@ -234,7 +234,10 @@ namespace JoyOI.Forum.Controllers
                     x.StatusCode = 500;
                 });
             await UserManager.RemoveFromRolesAsync(user, await UserManager.GetRolesAsync(user));
-            await UserManager.AddToRoleAsync(user, Role);
+            if (Role == "Master")
+            {
+                await UserManager.AddToRoleAsync(user, Role);
+            }
             return Prompt(x =>
             {
                 x.Title = "修改成功";
