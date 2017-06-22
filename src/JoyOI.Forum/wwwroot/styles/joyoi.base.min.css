@@ -15829,6 +15829,10 @@ td i {
     color: #555
 }
 
-.table tr:hover, .table tr:hover td {
-    background: #fff8df !important
+.table tr:hover {
+    background: #fff8df;
 }
+
+    .table tr:hover td {
+        background: none;
+    }
