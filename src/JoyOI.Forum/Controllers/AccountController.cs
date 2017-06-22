@@ -220,12 +220,12 @@ namespace JoyOI.Forum.Controllers
         }
 
         [HttpPost]
-        [AnyRoles("Root, Master")]
+        [AnyRoles("Root")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Role(long id, string Role)
+        public async Task<IActionResult> Role(Guid id, string Role)
         {
             var user = await UserManager.FindByIdAsync(id.ToString());
-            if (User.AnyRoles("Master") && await UserManager.IsInAnyRolesAsync(user, "Root, Master"))
+            if (!User.IsInRole("Root") || await User.Manager.IsInRoleAsync(user, "Root"))
                 return Prompt(x =>
                 {
                     x.Title = "权限不足";

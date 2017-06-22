@@ -36,15 +36,23 @@
                             <ul class="profile-tabs-ul">
                                 <li class="profile-tabs-item" onclick="openTab('#tab-threads', '@Model.Id', 'UserThread')">主题 (@ViewBag.TotalThreads)</li>
                                 <li class="profile-tabs-item" onclick="openTab('#tab-posts', '@Model.Id', 'UserPost')">回复 (@ViewBag.TotalPosts)</li>
-                                <li class="profile-tabs-item">修改密码</li>
+                                @if (User.IsInRole("Root") && !await User.Manager.IsInRoleAsync(Model, "Root"))
+                                {
+                                    <li class="profile-tabs-item" onclick="openTab('#tab-role')">角色</li>
+                                }
                             </ul>
-
-                            <div class="profile-tabs-section" id="tab-threads">
-
-                            </div>
-
-                            <div class="profile-tabs-section" id="tab-posts">
-
+                            <div class="profile-tabs-section" id="tab-threads"></div>
+                            <div class="profile-tabs-section" id="tab-posts"></div>
+                            <div class="profile-tabs-section" id="tab-role">
+                                <form asp-action="Role" asp-controller="Account" asp-route-id="@Model.Id">
+                                    <select class="form-control" name="role">
+                                        @{
+                                            var isMaster = await User.Manager.IsInRoleAsync(Model, "Master");
+                                        }
+                                        <!option @(isMaster ? "selected" : "")>Master</!option>
+                                        <!option @(!isMaster ? "selected" : "")>Member</!option>
+                                    </select>
+                                </form>
                             </div>
                         </div>
                     </div>
