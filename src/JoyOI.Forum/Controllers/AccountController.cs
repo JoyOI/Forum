@@ -65,7 +65,8 @@ namespace JoyOI.Forum.Controllers
                 }
                 else
                 {
-                    await UserManager.RemoveFromRoleAsync(user, "Root");
+                    if (roles.Any(x => x == "Root"))
+                        await UserManager.RemoveFromRoleAsync(user, "Root");
                 }
                 
                 await SignInManager.SignInAsync(user, true);
@@ -78,7 +79,7 @@ namespace JoyOI.Forum.Controllers
             {
                 return Prompt(x =>
                 {
-                    x.Title = SR["Sign in failed"];
+                    x.Title = "登录失败";
                     x.Details = authorizeResult.msg;
                     x.StatusCode = authorizeResult.code;
                 });
