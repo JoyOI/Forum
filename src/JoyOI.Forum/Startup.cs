@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -10,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Pomelo.AspNetCore.Localization;
+using Newtonsoft.Json;
 using JoyOI.Forum.Models;
 
 namespace JoyOI.Forum
@@ -41,6 +44,15 @@ namespace JoyOI.Forum
 
             services.AddMvc();
 
+            services.AddContextAccessor();
+
+            services.AddPomeloLocalization(x =>
+            {
+                var cultures = JsonConvert.DeserializeObject<List<dynamic>>(File.ReadAllText(Path.Combine("Localization", "cultures.json")));
+                foreach (dynamic c in cultures)
+                    x.AddCulture(c.Cultures.ToObject<string[]>(), new JsonLocalizedStringStore(Path.Combine("Localization", c.Source.ToString())));
+            });
+
             services.AddSignalR();
             services.AddAntiXss();
             services.AddAesCrypto();
@@ -54,6 +66,7 @@ namespace JoyOI.Forum
             loggerFactory.AddConsole(LogLevel.Warning, true);
 
             app.UseStaticFiles();
+            app.UseFrontendLocalizer();
             app.UseDeveloperExceptionPage();
             app.UseIdentity();
             app.UseBlobStorage("/scripts/jquery.pomelo.fileupload.js");
