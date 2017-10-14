@@ -5,7 +5,7 @@ using Pomelo.AspNetCore.Extensions.BlobStorage.Models;
 
 namespace JoyOI.Forum.Models
 {
-    public class ForumContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>, IBlobStorageDbContext
+    public class ForumContext : IdentityDbContext<User, Role, Guid>, IBlobStorageDbContext
     {
         public ForumContext(DbContextOptions opt) : base(opt)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +27,7 @@ namespace JoyOI.Forum
             services.AddEntityFrameworkMySql()
                .AddDbContext<ForumContext>(x => x.UseMySql(Configuration["Data:MySQL"]));
 
-            services.AddIdentity<User, IdentityRole<Guid>>(x =>
+            services.AddIdentity<User, Role>(x =>
             {
                 x.Password.RequireDigit = false;
                 x.Password.RequiredLength = 0;
@@ -37,7 +37,7 @@ namespace JoyOI.Forum
                 x.User.AllowedUserNameCharacters = null;
             })
                 .AddDefaultTokenProviders()
-                .AddEntityFrameworkStores<ForumContext, Guid>();
+                .AddEntityFrameworkStores<ForumContext>();
 
             services.AddBlobStorage()
                 .AddEntityFrameworkStorage<ForumContext>();
@@ -68,9 +68,8 @@ namespace JoyOI.Forum
             app.UseStaticFiles();
             app.UseFrontendLocalizer();
             app.UseDeveloperExceptionPage();
-            app.UseIdentity();
+            app.UseAuthentication();
             app.UseBlobStorage("/scripts/jquery.pomelo.fileupload.js");
-            app.UseIdentity();
             app.UseStaticFiles();
             app.UseWebSockets();
             app.UseSignalR();
