@@ -24,6 +24,7 @@ namespace JoyOI.Forum.Models
 
                 var forum = new Forum { Title = "父板块1", Id = "forum-1" };
                 var forum2 = new Forum { Title = "父板块2", Id = "forum-2" };
+                var forum3 = new Forum { Title = "题目讨论", Id = "problem", PRI = -1 };
                 var sub1 = new Forum { Title = "子板块1", ParentId = "forum-1", Id = "sub-1" };
                 var sub2 = new Forum { Title = "子板块2", ParentId = "forum-1", Id = "sub-2" };
                 var sub3 = new Forum { Title = "子板块3", ParentId = "forum-1", Id = "sub-3" };
@@ -31,6 +32,7 @@ namespace JoyOI.Forum.Models
                 var sub5 = new Forum { Title = "子板块5", ParentId = "forum-2", Id = "sub-5" };
                 DB.Forums.Add(forum);
                 DB.Forums.Add(forum2);
+                DB.Forums.Add(forum3);
                 DB.Forums.Add(sub1);
                 DB.Forums.Add(sub2);
                 DB.Forums.Add(sub3);

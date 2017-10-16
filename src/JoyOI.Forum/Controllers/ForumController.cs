@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace JoyOI.Forum.Controllers
             var end = DateTime.Today.AddDays(1);
             var ret = DB.Forums
                 .Include(x => x.SubForums)
-                .Where(x => x.SubForums.Count > 0 && x.ParentId == null)
+                .Where(x => x.SubForums.Count > 0 && x.ParentId == null && x.PRI >= 0)
                 .OrderBy(x => x.PRI)
                 .ToList();
             foreach (var x in ret)
@@ -44,18 +45,42 @@ namespace JoyOI.Forum.Controllers
 
         [Route("Forum/{id}")]
         [Route("Forum/{id}/{p:int}")]
-        public IActionResult Show(string id)
+        public async Task<IActionResult> Show(string id)
         {
             var forum = DB.Forums
                 .Where(x => x.Id == id)
                 .SingleOrDefault();
             if (forum == null)
-                return Prompt(x =>
+            {
+                if (id.StartsWith("problem-"))
                 {
-                    x.Title = "资源没有找到";
-                    x.Details = "您请求的资源没有找到，请返回重试！";
-                    x.StatusCode = 404;
-                });
+                    var title = await Helpers.OjHelper.GetProblemTitleAsync(id.Replace("problem-", ""));
+                    if (string.IsNullOrWhiteSpace(title))
+                    {
+                        return Prompt(x =>
+                        {
+                            x.Title = "资源没有找到";
+                            x.Details = "您请求的资源没有找到，请返回重试！";
+                            x.StatusCode = 404;
+                        });
+                    }
+                    else
+                    {
+                        forum = new Models.Forum { Title = title, ParentId = "problem", Id = id };
+                        DB.Forums.Add(forum);
+                        DB.SaveChanges();
+                    }
+                }
+                else
+                {
+                    return Prompt(x =>
+                    {
+                        x.Title = "资源没有找到";
+                        x.Details = "您请求的资源没有找到，请返回重试！";
+                        x.StatusCode = 404;
+                    });
+                }
+            }
             ViewBag.Forum = forum;
             ViewBag.Title = forum.Title;
             var ret = DB.Threads

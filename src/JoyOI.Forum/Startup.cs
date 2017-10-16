@@ -19,13 +19,13 @@ namespace JoyOI.Forum
 {
     public class Startup
     {
+        public static IConfiguration Config;
         public void ConfigureServices(IServiceCollection services)
         {
-            IConfiguration Configuration;
-            services.AddConfiguration(out Configuration);
+            services.AddConfiguration(out Config);
 
             services.AddEntityFrameworkMySql()
-               .AddDbContext<ForumContext>(x => x.UseMySql(Configuration["Data:MySQL"]));
+               .AddDbContext<ForumContext>(x => x.UseMySql(Config["Data:MySQL"]));
 
             services.AddIdentity<User, Role>(x =>
             {
