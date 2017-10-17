@@ -52,7 +52,8 @@ namespace JoyOI.Forum.Controllers
                 userId = x.User.OpenId,
                 username = x.User.UserName,
                 avatarUrl = UC.GetAvatarUrl(x.User.OpenId),
-                replyCount = x.Posts.Count
+                replyCount = x.Posts.Count,
+                highlight = x.IsAnnouncement
             }));
         }
     }
