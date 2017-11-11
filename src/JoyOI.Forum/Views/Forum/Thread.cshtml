@@ -7,7 +7,7 @@
 @section Navigator {
     <div class="columns">
         <div class="location-path">
-            / <a href="/">JoyOI</a> / <a asp-action="Profile" asp-controller="Forum" asp-route-id="@Thread.ForumId">@Thread.Forum.Title</a> /
+            / <a href="/">JoyOI</a> / <a asp-action="Show" asp-controller="Forum" asp-route-id="@Thread.ForumId">@Thread.Forum.Title</a> /
         </div>
         <h1 class="location-current" data-emoji-enabled="">@Thread.Title</h1>
     </div>
@@ -125,10 +125,11 @@
                                         <a asp-action="Profile" asp-controller="Account" asp-route-id="@x.User.UserName" class="center">@await Html.ColorUserNameAsync(x.User)</a>
                                         <hr />
                                         <p><img class="post-avatar" src="@x.User.AvatarUrl" /></p>
-                                        @if (await User.Manager.IsInAnyRolesAsync(Thread.User, "Root, Master"))
+                                        @if (await User.Manager.IsInAnyRolesAsync(x.User, "Root, Master"))
                                         {
-                                            <p class="post-role"><span class="thread-label purple">@((await User.Manager.GetRolesAsync(Thread.User)).FirstOrDefault())</span></p>
-                                        }                                    </td>
+                                            <p class="post-role"><span class="thread-label purple">@((await User.Manager.GetRolesAsync(x.User)).FirstOrDefault())</span></p>
+                                        }
+                                    </td>
                                     <td>
                                         @if (Thread.UserId == x.UserId)
                                         {
