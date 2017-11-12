@@ -78,9 +78,13 @@
                                     {
                                         <span class="thread-label purple">ANNOUNCEMENT</span>
                                     }
-                                    @if (Thread.IsTop)
+                                    else if (Thread.IsTop)
                                     {
                                         <span class="thread-label purple">TOP</span>
+                                    }
+                                    else if (Thread.IsLocked)
+                                    {
+                                        <span class="thread-label">LOCKED</span>
                                     }
                                     @if (User.IsSignedIn())
                                     {
