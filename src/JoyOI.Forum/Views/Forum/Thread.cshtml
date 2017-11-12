@@ -19,7 +19,7 @@
         <form asp-action="Post" asp-controller="Forum" asp-route-id="@Thread.Id" id="frmNewPost">
             <input type="hidden" name="pid" id="new-post-pid" />
             <div class="markdown-editor-outer">
-                <textarea class="textbox markdown-editor" name="Content"></textarea>
+                <textarea class="markdown-editor" name="Content"></textarea>
                 <div class="markdown-editor-bottom">
                     <a href="javascript:NewPost();">发表回复</a>
                     <a href="javascript:$('#new-post-outer').append($('#new-post'))">取消回复</a>
@@ -35,7 +35,7 @@
         <form asp-action="EditPost" asp-controller="Forum" asp-route-id="@Thread.Id" id="frmEditPost">
             <input type="hidden" name="pid" id="post-edit-id" />
             <div class="markdown-editor-outer">
-                <textarea class="textbox markdown-editor" name="Content" id="txtEditPost"></textarea>
+                <textarea class="markdown-editor" name="Content" id="txtEditPost"></textarea>
                 <div class="markdown-editor-bottom">
                     <a href="javascript:EditPostSubmit()">保存修改</a>
                     <a href="javascript:CancelEditPost()">取消编辑</a>
@@ -110,7 +110,7 @@
                                         <div class="thread-edit">
                                             <form asp-action="EditThread" asp-controller="Forum" asp-route-id="@Thread.Id" id="frmEditThread">
                                                 <div class="markdown-editor-outer">
-                                                    <textarea class="textbox markdown-editor" id="txtEditThread" name="Content">@Thread.Content</textarea>
+                                                    <textarea class="markdown-editor" id="txtEditThread" name="Content">@Thread.Content</textarea>
                                                     <div class="markdown-editor-bottom">
                                                         <a href="javascript:EditThreadSubmit()">保存修改</a>
                                                         <a href="javascript:CancelEditThread()">取消编辑</a>
@@ -220,7 +220,7 @@
                                 <p>发表回复</p>
                                 <form asp-action="Post" asp-controller="Forum" asp-route-id="@Thread.Id" method="post" id="frmNewReply">
                                     <div class="markdown-editor-outer">
-                                        <textarea class="textbox markdown-editor" name="Content"></textarea>
+                                        <textarea class="markdown-editor" name="Content"></textarea>
                                         <div class="markdown-editor-bottom">支持Markdown语法、拖拽图片文件至编辑区或直接从剪贴板粘贴可上传图片文件。</div>
                                     </div>
                                     <hr />
