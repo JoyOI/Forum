@@ -48,7 +48,7 @@ namespace JoyOI.Forum.Controllers
                 forumId = x.ForumId,
                 threadId = x.Id,
                 threadTitle = x.Title,
-                time = x.LastReplyTime,
+                time = x.LastReplyTime.AddHours(-8), // UTC+8 to UTC
                 userId = x.User.OpenId,
                 username = x.User.UserName,
                 avatarUrl = UC.GetAvatarUrl(x.User.OpenId),
