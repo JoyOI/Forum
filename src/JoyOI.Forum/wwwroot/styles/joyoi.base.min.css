@@ -15568,7 +15568,6 @@ td i {
 .profile-body {
     display: table-cell;
     vertical-align: middle;
-    width: 100%;
     box-sizing: inherit;
     height: 120px
 }
