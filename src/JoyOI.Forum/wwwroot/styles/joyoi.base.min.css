@@ -15199,7 +15199,8 @@ pre {
     height: 100px;
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0,0,0,.2);
-    margin-top: 10px
+    margin-top: 10px;
+    margin-bottom: 10px
 }
 
 hr {
@@ -15297,7 +15298,7 @@ td .comment-item:last-child {
 }
 
 .post-role {
-    margin-top: 12px !important
+    margin-top: 2px !important
 }
 
 .markdown-editor-outer {
