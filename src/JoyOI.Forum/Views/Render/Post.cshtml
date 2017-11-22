@@ -10,7 +10,7 @@
         <a asp-action="Profile" asp-controller="Account" asp-route-id="@x.User.UserName" class="center">@await Html.ColorUserNameAsync(x.User)</a>
         <hr />
         <p><img class="post-avatar" src="@x.User.AvatarUrl" /></p>
-            @if (User.AnyRoles("Root, Master"))
+            @if (await User.Manager.IsInAnyRolesAsync(x.User, "Root, Master"))
             { 
                 <p class="post-role"><span class="thread-label purple">@((await User.Manager.GetRolesAsync(x.User)).FirstOrDefault())</span></p>
             }

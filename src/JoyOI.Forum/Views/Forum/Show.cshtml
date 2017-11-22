@@ -62,7 +62,7 @@
                                         @if (x.LastPost != null)
                                         {
                                             <img src="@x.LastPost.User.AvatarUrl" class="table-forums-avatar" />
-                                            <a asp-action="Thread" asp-controller="Forum" asp-route-id="@x.LastPost.ThreadId"><span class="table-forums-micro-title gray">@x.LastPost.FiltedContent</span></a>
+                                            <a asp-action="Thread" asp-controller="Forum" asp-route-id="@x.Id"><span class="table-forums-micro-title gray">@x.LastPost.FiltedContent</span></a>
                                             <div class="table-forums-micro-title"><a asp-action="Profile" asp-controller="Account" asp-route-id="@x.LastPost.User.UserName">@await Html.ColorUserNameAsync(x.LastPost.User)</a> <span class="table-forums-lastrep-time">@@@x.LastPost.Time.ToString("yyyy-MM-dd HH:mm")</span></div>
                                         }
                                         else
@@ -110,7 +110,7 @@
                                         @if (x.LastPost != null)
                                         {
                                             <img src="@x.LastPost.User.AvatarUrl" class="table-forums-avatar" />
-                                            <a asp-action="Thread" asp-controller="Forum" asp-route-id="@x.LastPost.Id"><span class="table-forums-micro-title gray">@x.LastPost.FiltedContent</span></a>
+                                            <a asp-action="Thread" asp-controller="Forum" asp-route-id="@x.Id"><span class="table-forums-micro-title gray">@x.LastPost.FiltedContent</span></a>
                                             <div class="table-forums-micro-title"><a asp-action="Profile" asp-controller="Account" asp-route-id="@x.LastPost.User.UserName">@await Html.ColorUserNameAsync(x.LastPost.User)</a> <span class="table-forums-lastrep-time">@@@x.LastPost.Time.ToString("yyyy-MM-dd HH:mm")</span></div>
                                         }
                                         else
