@@ -40,7 +40,7 @@
     <div class="cover cover-single mobile-cover @(IsSectionDefined("Navigator") == false ? "" : "cover-url")">
         <div class="cont-wrap">
             <div class="grid_12 mobile-cover-center" style="text-align:left">
-                <img src="~/images/logo.png" class="mobile-cover-img"  style="height:140px;margin-top:-60px;" />
+                <img src="~/images/logo.png" class="mobile-cover-img" style="height:140px;margin-top:-60px;" />
             </div>
         </div>
         @if (IsSectionDefined("Navigator"))
@@ -61,28 +61,14 @@
     </div>
 
     @Html.Partial("_Footer")
-    <a href="#" id="back-to-top"><i class="fa fa-chevron-up"></i></a>
-    <div class="search-popup">
-        <div class="close-button">
-            <i class="material-icons">&#xE5C9;</i>
-        </div>
-        <div class="container popup-inner">
-            <div class="row">
-                <div class="col-sm-12">
-                    <form>
-                        <div class="input-group">
-                            <input type="email" class="required" id="search-input">
-                            <span class="bar"></span>
-                            <label>Type to search</label>
-                        </div>
-                        <!-- <input type="text"  placeholder="" /> -->
-                    </form>
-                    <div id="search-results">
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @User.IsSignedIn()
+    {
+        <a href="javascript:toggleChatBox();" id="back-to-top"><i class="fa fa-comment-o"></i></a>
+    }
+
+    <!-- start chat -->
+    <iframe src="@ViewBag.ChatUrl" class="chat-iframe"></iframe>
+    <!-- end chat -->
 </body>
 </html>

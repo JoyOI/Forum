@@ -96,3 +96,13 @@ render.Post = function (id, callback) {
         callback();
     });
 };
+
+function toggleChatBox() {
+    if ($('.chat-iframe').hasClass('active')) {
+        $('.chat-iframe').removeClass('active');
+        $('#back-to-top').css('margin-right', 0);
+    } else {
+        $('.chat-iframe').addClass('active');
+        $('#back-to-top').css('margin-right', 350);
+    }
+}

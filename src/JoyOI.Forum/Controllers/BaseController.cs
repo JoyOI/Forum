@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 using Pomelo.Net.Smtp;
 using JoyOI.Forum.Models;
 using JoyOI.Forum.Hubs;
+using JoyOI.UserCenter.SDK;
 
 namespace JoyOI.Forum.Controllers
 {
@@ -24,7 +25,15 @@ namespace JoyOI.Forum.Controllers
                 User.Current.ActiveTime = DateTime.Now;
                 DB.SaveChanges();
             }
+
+            if (User.Current != null)
+            {
+                ViewBag.ChatUrl = UC.GenerateChatWindowUrl(User.Current.OpenId);
+            }
         }
+
+        [Inject]
+        public JoyOIUC UC { get; set; }
 
         [Inject]
         public IHubContext<ForumHub> ForumHub { get; set; }
