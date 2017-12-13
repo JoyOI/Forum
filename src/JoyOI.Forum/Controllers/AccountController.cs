@@ -20,6 +20,8 @@ namespace JoyOI.Forum.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            ViewBag.RegisterLink = Configuration["JoyOI:RegisterUrl"];
+            ViewBag.ForgotLink = Configuration["JoyOI:ForgotUrl"];
             return View();
         }
 
