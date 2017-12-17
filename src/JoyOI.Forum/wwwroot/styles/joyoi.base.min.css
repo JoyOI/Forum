@@ -16044,3 +16044,11 @@ td i {
     .chat-iframe.active {
         margin-right: 0;
     }
+
+.editor-toolbar.fullscreen {
+    top: 50px !important;
+}
+
+.CodeMirror-fullscreen {
+    top: 100px !important;
+}
